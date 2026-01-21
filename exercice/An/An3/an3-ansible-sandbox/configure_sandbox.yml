@@ -1,0 +1,12 @@
+---
+- name: Configure cloud sandbox router
+  hosts: sandbox_routers
+  gather_facts: no
+
+  tasks:
+    - name: Configure Loopback interface on sandbox router
+      ios_config:
+        lines:
+          - description Configured by Ansible Sandbox (An3)
+          - ip address 10.30.30.1 255.255.255.255
+        parents: interface Loopback300
