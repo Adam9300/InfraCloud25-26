@@ -1,0 +1,56 @@
+---
+- name: Webserver experiment - Apache + custom pagina + optionele poort
+  hosts: webservers
+  become: yes
+
+  vars:
+    apache_port: 8081
+
+  tasks:
+    - name: Install Apache2
+      apt:
+        name: apache2
+        update_cache: yes
+        state: latest
+
+    - name: Enable mod_rewrite
+      apache2_module:
+        name: rewrite
+        state: present
+      notify: Restart Apache2
+
+    - name: Set Apache listen port
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        regexp: '^Listen '
+        line: "Listen {{ apache_port }}"
+        state: present
+      notify: Restart Apache2
+
+    - name: Set default VirtualHost port
+      lineinfile:
+        path: /etc/apache2/sites-available/000-default.conf
+        regexp: '^<VirtualHost \*:'
+        line: "<VirtualHost *:{{ apache_port }}>"
+        state: present
+      notify: Restart Apache2
+
+    - name: Deploy custom index.html
+      copy:
+        src: templates/index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Ensure Apache2 is enabled and running
+      service:
+        name: apache2
+        enabled: yes
+        state: started
+
+  handlers:
+    - name: Restart Apache2
+      service:
+        name: apache2
+        state: restarted

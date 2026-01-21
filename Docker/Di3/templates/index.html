@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Image Experiment (SQL)</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <h1>Image Experiment (SQL)</h1>
+    <p class="muted">
+      Upload een afbeelding, voer een experiment uit (grayscale) en log alles in SQLite.
+    </p>
+
+    <div class="card">
+      <h2>Upload</h2>
+      <form action="/upload" method="POST" enctype="multipart/form-data" class="form">
+        <label>
+          Afbeelding
+          <input type="file" name="file" accept="image/*" required />
+        </label>
+
+        <label>
+          Experiment
+          <select name="experiment">
+            <option value="grayscale">grayscale</option>
+          </select>
+        </label>
+
+        <button type="submit">Upload & Run</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <h2>Recent (laatste 5)</h2>
+        <a href="/gallery">Open gallery →</a>
+      </div>
+
+      {% if recent and recent|length > 0 %}
+        <ul class="list">
+          {% for r in recent %}
+          <li class="list-item">
+            <div>
+              <strong>#{{ r["id"] }}</strong>
+              <span class="muted"> — {{ r["experiment"] }} — {{ r["created_at"] }}</span>
+              <div class="muted small">Origineel: {{ r["original_name"] }}</div>
+            </div>
+            <div class="actions">
+              <a class="btn" href="/view/{{ r['stored_name'] }}">View</a>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="muted">Nog geen uploads.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
