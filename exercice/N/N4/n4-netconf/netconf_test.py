@@ -9,6 +9,7 @@ router = {
     "hostkey_verify": False
 }
 
+
 with manager.connect(**router) as m:
     print("=== NETCONF CAPABILITIES ===")
     for capability in m.server_capabilities:

@@ -1,3 +1,2 @@
-[webservers]
-192.0.2.3 ansible_user=devasc ansible_password=Cisco123! ansible_connection=ssh ansible_python_interpreter=/usr/bin/python3
-
+[routers]
+CSR1kv ansible_host=192.168.56.101 ansible_user=cisco ansible_password=cisco123!

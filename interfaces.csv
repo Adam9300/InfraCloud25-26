@@ -1,3 +1,0 @@
-name,ip,description
-GigabitEthernet0/0,192.168.1.1,Uplink naar router
-GigabitEthernet0/1,192.168.2.1,LAN verbinding

@@ -1,6 +1,6 @@
 import requests
 
-ACCESS_TOKEN = "ZTU4ODM5YmYtODA2OS00ZDk4LWJkZWYtZmE0NjhiZmQ4MTcxZTY0MDgzYWEtM2Fk_P0A1_cce0a1f3-bf77-42c7-a45d-46ec83d996ea"
+ACCESS_TOKEN = "ZjczMDE4NTMtODU1Ni00NDA2LTg2M2EtYWYzNzAwZWIwNDgxYmRlMDUzZjctMzYw_P0A1_cce0a1f3-bf77-42c7-a45d-46ec83d996ea"
 
 headers = {
     "Authorization": f"Bearer {ACCESS_TOKEN}",

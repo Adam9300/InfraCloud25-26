@@ -1,0 +1,1 @@
+sandbox ansible_host=devnetsandboxiosxec8k.cisco.com ansible_user=adam.elbouab ansible_password=7gHJx-z8rZ-1 ansible_network_os=ios
